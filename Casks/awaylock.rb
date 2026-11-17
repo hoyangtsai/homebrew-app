@@ -1,6 +1,6 @@
 cask "awaylock" do
-  version "0.1.7"
-  sha256 "ce7a4505cd7e1eec2fa29e5b9bbf29195076758de699175cd14767a117d79273"
+  version "0.1.9"
+  sha256 "0c7728796eadf7877e9390f82c586bae94d80708535f2087ffd6eb7b6f355b8d"
 
   url "https://github.com/hoyangtsai/awaylock/releases/download/v#{version}/awaylock-#{version}-arm64.zip"
   name "awaylock"
