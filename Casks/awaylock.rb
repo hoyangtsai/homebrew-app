@@ -8,18 +8,20 @@ cask "awaylock" do
   homepage "https://github.com/hoyangtsai/awaylock"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "awaylock.app"
 
-  # App 未經 Apple 公證，移除隔離標記才能直接開啟
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/awaylock.app"]
+  # The app is not notarized by Apple; remove the quarantine flag so it opens directly
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/awaylock.app"],
+        must_succeed: false
   end
 
   zap trash: [
-    "~/Library/Application Support/com.awaylock.app",
+    "~/Library/Application Support/app.awaylock.AwayLock",
+    "~/Library/Application Support/app.awaylock.awaylock",
     "~/Library/Preferences/com.awaylock.app.plist",
   ]
 end
